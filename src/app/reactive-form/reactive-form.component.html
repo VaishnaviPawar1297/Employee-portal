@@ -1,0 +1,108 @@
+<div class="topnav">
+    <a class="active" href="#home">Home</a>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-8 mx-auto">
+          <div class="card">
+              <div class="card-header">
+                  <h1>Employee Registration Form</h1>
+              </div>
+              <div class="card-body">
+                  <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                      <div class="form-group">
+                          <label>Employee Name</label>
+                          <input type="text" class="form-control" formControlName="name">
+                          <span class="text-danger"
+                              *ngIf="(registerFormControl.name.touched || submitted) && registerFormControl.name.errors?.required">
+                              Name is required
+                          </span>
+                      </div>
+                      <div class="form-group">
+                          <label>Employee Email</label>
+                          <input type="text" class="form-control" formControlName="email">
+                          <span class="text-danger"
+                              *ngIf="(registerFormControl.email.touched || submitted) && registerFormControl.email.errors?.required">
+                              Email is required
+                          </span>
+                          <span class="text-danger"
+                              *ngIf="registerFormControl.email.touched && registerFormControl.email.errors?.invalidMail">
+                              Enter a valid email address
+                          </span>
+                      </div>
+                      <div class="form-group">
+                        <label>Employee ID</label>
+                        <input type="text" class="form-control" formControlName="empId">
+                        <span class="text-danger"
+                            *ngIf="(registerFormControl.empId.touched || submitted) && registerFormControl.empId.errors?.required">
+                            ID required
+                        </span>
+                        <span class="text-danger"
+                              *ngIf="registerFormControl.empId.touched && registerFormControl.empId.errors?.invalidempId">
+                              Id should start with HIN
+                        </span>
+
+                      </div>
+                      <div class="form-group">
+                          <label>Employee Phone number</label>
+                          <input type="text" class="form-control" formControlName="empNumber">
+                          <span class="text-danger"
+                            *ngIf="(registerFormControl.empNumber.touched || submitted) && registerFormControl.empNumber.errors?.required">
+                            Number required
+                          </span>
+                          <span class="text-danger"
+                            *ngIf="registerFormControl.empNumber.touched && registerFormControl.empNumber.errors?.invalidNumber">
+                            Enter valid Phone number
+                          </span>
+                      </div>
+                      
+                      <div class="form-group">
+                          <label>User Name</label>
+                          <input type="text" class="form-control" formControlName="username">
+                          <span class="text-danger"
+                              *ngIf="(registerFormControl.username.touched || submitted) && registerFormControl.username.errors?.required">
+                              User Name is required
+                          </span>
+                          <span class="text-danger"
+                              *ngIf="registerFormControl.username.touched && registerFormControl.username.errors?.userNameNotAvailable">
+                              User Name is not available
+                          </span>
+                      </div>
+                      <div class="form-group">
+                          <label>Password</label>
+                          <input type="password" class="form-control" formControlName="password">
+                          <span class="text-danger"
+                              *ngIf="(registerFormControl.password.touched || submitted) && registerFormControl.password.errors?.required">
+                              Password is required
+                          </span>
+                          <span class="text-danger"
+                              *ngIf="registerFormControl.password.touched && registerFormControl.password.errors?.invalidPassword">
+                              Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase
+                              letter and 1 number
+                          </span>
+                      </div>
+                      <div class="form-group">
+                          <label>Confirm Password</label>
+                          <input type="password" class="form-control" formControlName="confirmPassword">
+                          <span class="text-danger"
+                              *ngIf="(registerFormControl.confirmPassword.touched || submitted)&& registerFormControl.confirmPassword.errors?.required">
+                              Confirm Password is required
+                          </span>
+                          <span class="text-danger"
+                              *ngIf="registerFormControl.confirmPassword.touched && registerFormControl.confirmPassword.errors?.passwordMismatch">
+                              Passwords doesnot match
+                          </span>
+                      </div>
+                      <div class="form-group">
+                          <button type="submit" class="btn btn-success">Register</button>                          
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
