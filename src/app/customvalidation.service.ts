@@ -57,7 +57,7 @@ export class CustomvalidationService {
         return null;
       }
 
-      const regex = new RegExp('/H[I]N/g');
+      const regex = new RegExp('^[HIN]{3}[0-9]{3}$');
       const valid = regex.test(control.value);
       return valid ? null: { invalidempId: true };
     }
