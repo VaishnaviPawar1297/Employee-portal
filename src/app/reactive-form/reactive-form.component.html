@@ -6,12 +6,12 @@
                   <h1>Employee Registration Form</h1>
               </div>
               <div class="card-body">
-                  <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()" (ngcCancel)="onCancel()">
+                  <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                       <div class="form-group">
                           <label>Employee Name</label>
                           <input type="text" class="form-control" formControlName="name">
                           <span class="text-danger"
-                              *ngIf="(registerFormControl.name.touched || submitted) && registerFormControl.name.errors?.required">
+                              *ngIf="(registerFormControl.name.touched || submitted) && registerFormControl.name.errors?.required"><br>
                               Name is required
                           </span>
                       </div>
@@ -19,11 +19,11 @@
                           <label>Employee Email</label>
                           <input type="text" class="form-control" formControlName="email">
                           <span class="text-danger"
-                              *ngIf="(registerFormControl.email.touched || submitted) && registerFormControl.email.errors?.required">
+                              *ngIf="(registerFormControl.email.touched || submitted) && registerFormControl.email.errors?.required"><br>
                               Email is required
                           </span>
                           <span class="text-danger"
-                              *ngIf="registerFormControl.email.touched && registerFormControl.email.errors?.invalidMail">
+                              *ngIf="registerFormControl.email.touched && registerFormControl.email.errors?.invalidMail"><br>
                               Enter a valid email address
                           </span>
                       </div>
@@ -31,11 +31,11 @@
                         <label>Employee ID</label> 
                         <input type="text" class="form-control" formControlName="empId">
                         <span class="text-danger"
-                            *ngIf="(registerFormControl.empId.touched || submitted) && registerFormControl.empId.errors?.required">
+                            *ngIf="(registerFormControl.empId.touched || submitted) && registerFormControl.empId.errors?.required"><br>
                             ID required
                         </span>
                         <span class="text-danger"
-                              *ngIf="registerFormControl.empId.touched && registerFormControl.empId.errors?.invalidempId">
+                              *ngIf="registerFormControl.empId.touched && registerFormControl.empId.errors?.invalidempId"><br>
                               Id should start with HIN
                         </span>
 
@@ -44,17 +44,17 @@
                           <label>Employee Phone number</label>
                           <input type="text" class="form-control" formControlName="empNumber">
                           <span class="text-danger"
-                            *ngIf="(registerFormControl.empNumber.touched || submitted) && registerFormControl.empNumber.errors?.required">
+                            *ngIf="(registerFormControl.empNumber.touched || submitted) && registerFormControl.empNumber.errors?.required"><br>
                             Number required
                           </span>
                           <span class="text-danger"
-                            *ngIf="registerFormControl.empNumber.touched && registerFormControl.empNumber.errors?.invalidNumber">
+                            *ngIf="registerFormControl.empNumber.touched && registerFormControl.empNumber.errors?.invalidNumber"><br>
                             Enter valid Phone number
                           </span>
                       </div>
                       <div class="form-group">
                           <label>Employee Role</label>
-                          <select name="role" id="role">
+                          <select name="role" id="role"  formControlName="empRole">
                               <option value="Associate Software Engineer">Associate Software Engineer</option>
                               <option value="Trainee Software Engineer">Trainee Software Engineer</option>
                           </select>
@@ -64,15 +64,16 @@
                           </span>-->
                       </div>
                       
+                      
                       <div class="form-group">
                           <label>User Name</label>
                           <input type="text" class="form-control" formControlName="username">
                           <span class="text-danger"
-                              *ngIf="(registerFormControl.username.touched || submitted) && registerFormControl.username.errors?.required">
+                              *ngIf="(registerFormControl.username.touched || submitted) && registerFormControl.username.errors?.required"><br>
                               User Name is required
                           </span>
                           <span class="text-danger"
-                              *ngIf="registerFormControl.username.touched && registerFormControl.username.errors?.userNameNotAvailable">
+                              *ngIf="registerFormControl.username.touched && registerFormControl.username.errors?.userNameNotAvailable"><br>
                               User Name is not available
                           </span>
                       </div>
@@ -80,11 +81,11 @@
                           <label>Password</label>
                           <input type="password" class="form-control" formControlName="password">
                           <span class="text-danger"
-                              *ngIf="(registerFormControl.password.touched || submitted) && registerFormControl.password.errors?.required">
+                              *ngIf="(registerFormControl.password.touched || submitted) && registerFormControl.password.errors?.required"><br>
                               Password is required
                           </span>
                           <span class="text-danger"
-                              *ngIf="registerFormControl.password.touched && registerFormControl.password.errors?.invalidPassword">
+                              *ngIf="registerFormControl.password.touched && registerFormControl.password.errors?.invalidPassword"><br>
                               Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase
                               letter and 1 number
                           </span>
@@ -93,17 +94,17 @@
                           <label>Confirm Password</label>
                           <input type="password" class="form-control" formControlName="confirmPassword">
                           <span class="text-danger"
-                              *ngIf="(registerFormControl.confirmPassword.touched || submitted)&& registerFormControl.confirmPassword.errors?.required">
+                              *ngIf="(registerFormControl.confirmPassword.touched || submitted)&& registerFormControl.confirmPassword.errors?.required"><br>
                               Confirm Password is required
                           </span>
                           <span class="text-danger"
-                              *ngIf="registerFormControl.confirmPassword.touched && registerFormControl.confirmPassword.errors?.passwordMismatch">
+                              *ngIf="registerFormControl.confirmPassword.touched && registerFormControl.confirmPassword.errors?.passwordMismatch"><br>
                               Passwords doesnot match
                           </span>
                       </div>
                       <div class="form-group">
-                          <button type="submit" class="btn btn-success">Register</button>
-                          <button type="reset" class="btn btn-reset">Reset</button>                         
+                          <button type="submit" class="btn btn-success">Register</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <button type="reset" class="btn btn-reset" (click)="validateForm()">Cancel</button>                         
                       </div>
                   </form>
               </div>

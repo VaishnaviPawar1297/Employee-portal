@@ -68,7 +68,7 @@ export class CustomvalidationService {
       if(!control.value){
         return null;
       }
-      const regex = new RegExp('^([1-9]{1})([01234789]{1})([0-9]{8})$');
+      const regex = new RegExp('^([1-9]{1})([0-9]{9})$');
       const valid = regex.test(control.value);
       return valid ? null: { invalidNumber: true };
 
@@ -80,7 +80,7 @@ export class CustomvalidationService {
          return null;
        }
      
-     const regex = new RegExp('^[a-z0-9](\.?[a-z0-9]){5,}@customfurnish\.com$');
+     const regex = new RegExp('^[a-z0-9](\.?[a-z0-9]){1,}@customfurnish\.com$');
      const valid = regex.test(control.value);
      return valid ? null: { invalidMail: true };
     }

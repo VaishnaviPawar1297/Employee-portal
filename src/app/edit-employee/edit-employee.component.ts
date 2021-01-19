@@ -10,6 +10,10 @@ export class EditEmployeeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+  }
+  addEmp(){
+    
   }
 
 }

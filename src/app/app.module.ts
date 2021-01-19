@@ -24,10 +24,9 @@ import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
     BrowserModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      {path: '', component: ReactiveFormComponent, pathMatch: 'full'},
-      {path: 'reactive-form', component: ReactiveFormComponent },
+      {path: '', redirectTo: '/reactiveform', pathMatch: 'full'},
+      {path: 'reactiveform',  component: ReactiveFormComponent },
       {path: 'empdetails', component: EmployeeDetailsComponent},
-      {path: 'editemp', component: EditEmployeeComponent}
 
     ]),
   ],
