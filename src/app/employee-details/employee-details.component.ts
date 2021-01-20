@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import{ReactiveFormComponent} from '../reactive-form/reactive-form.component';
-//import { Employee } from '../employee';
 import {FormGroup} from '@angular/forms';
 
 @Component({
@@ -34,16 +33,16 @@ export class EmployeeDetailsComponent implements OnInit {
     
     console.log(this.empdata);
   }
-  sortData() {
-    if (this.order) {
-      this.empdata = this.empdata.sort((i, j) => (j.empId > i.empId ? -1 : 1));
-    }
-    else {
-      this.empdata = this.empdata.sort((i, j) => (j.empId > i.empId ? 1 : -1));
-    }
+  // sortData() {
+  //   if (this.order) {
+  //     this.empdata = this.empdata.sort((i, j) => (j.empId > i.empId ? -1 : 1));
+  //   }
+  //   else {
+  //     this.empdata = this.empdata.sort((i, j) => (j.empId > i.empId ? 1 : -1));
+  //   }
     
-    this.order = !this.order;
-  }
+  //   this.order = !this.order;
+  // }
 
   filterById(initial: string){
     if(initial === ""){
@@ -52,4 +51,7 @@ export class EmployeeDetailsComponent implements OnInit {
       this.empdata = this.empdata.filter(i => i.empId.toLowerCase().indexOf(initial.toLocaleLowerCase()) !== -1);
     }
   }
+  // editData(){
+  //   if ()
+  // }
 }

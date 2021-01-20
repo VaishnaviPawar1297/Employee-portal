@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { CustomvalidationService } from '../customvalidation.service';
 import { Router } from '@angular/router';
-//import { Employee } from '../employee';
-//import {empRole} from '../employee';
 
 
 @Component({
@@ -100,7 +98,7 @@ export class ReactiveFormComponent implements OnInit {
   }
 
   duplicateFound(dupType: string) {
-    alert('Duplicate ' + dupType + ' already exists!!!');
+    alert('This ' + dupType + ' already exists!!!');
   }
 
   onCancel(){

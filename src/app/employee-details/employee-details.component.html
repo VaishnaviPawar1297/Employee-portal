@@ -1,35 +1,3 @@
-<!--<div class="employee-list">  
-    <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Employee Name</th>
-        <th>Employee Mail</th>
-        <th>Employee Id</th>
-        <th>Employee ph.no</th>
-        <th>Employee Designation</th>
-        <th>Actions</th>
-        
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let emp of empdata;let i = index">
-        
-        <td class="hidden">{{emp.name}}</td>-->
-        <!--<td>{{emp.name}}</td>
-        <td>{{emp.email}}</td>
-        <td>{{emp.empId}}</td>
-        <td>{{emp.empNumber}}</td>
-        <td>{{emp.empRole}}</td>
-        <td>
-          <button (click)="editData(emp)">Edit</button>
-          <button (click)="deletedata(emp)">Delete</button>
-        </td>
-      </tr>
-
-      
-    </tbody>
-    </table>
-</div>-->
 <!--<div class="search">
   <label>Search Employee</label>&nbsp;
   <input type="text" placeholder="Search">
@@ -42,7 +10,7 @@
   <b>Search by Name</b> : <input type="text" (keyup)="filterByText($event.target.value)"> &nbsp;&nbsp;
   <b>Search by Id</b>: <input type="text" (keyup)="filterById($event.target.value)">
 
-  <input type="button" (click)="sortData(order)" [value]="order ? 'Asc' : ' Desc'">
+  <!-- <input type="button" (click)="sortData(order)" [value]="order ? 'Asc' : ' Desc'"> -->
 </div>
 <div class="navright">
     <a  routerLink = "/reactiveform"><b>Add Employee</b></a>
@@ -61,7 +29,7 @@
   </thead>
   <tbody>
 
-    <tr *ngFor="let emp of empdata;let i = index">
+    <tr *ngFor="let emp of empdata">
               
       <td>{{emp.name}}</td>
       <td>{{emp.email}}</td>
