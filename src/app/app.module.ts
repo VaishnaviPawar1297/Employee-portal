@@ -10,6 +10,10 @@ import { RouterModule } from '@angular/router';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 
+//import { GenderPipe } from './pipe/gender.pipe';
+//import { OrderByPipe } from './pipe/order-by.pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 
 @NgModule({
@@ -23,6 +27,8 @@ import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    Ng2SearchPipeModule,
+
     RouterModule.forRoot([
       {path: '', redirectTo: '/reactiveform', pathMatch: 'full'},
       {path: 'reactiveform',  component: ReactiveFormComponent },
