@@ -29,7 +29,7 @@
   </thead>
   <tbody>
 
-    <tr *ngFor="let emp of empdata">
+    <tr *ngFor="let emp of empdata, let i = index">
               
       <td>{{emp.name}}</td>
       <td>{{emp.email}}</td>
@@ -38,7 +38,7 @@
       <td>{{emp.empRole}}</td>
       <td>
         <button (click)="editData(emp)">Edit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button (click)="deleteData(emp)">Delete</button>
+        <button (click)="deleteEmp(emp)">Delete</button>
       </td>
     </tr>
   </tbody>
