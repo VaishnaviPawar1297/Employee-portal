@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { CustomvalidationService } from '../customvalidation.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -17,8 +17,11 @@ export class ReactiveFormComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private customValidator: CustomvalidationService,
+    private route: ActivatedRoute
   ) { }
   ngOnInit() {
+    const employeId = this.route.snapshot.queryParams.employeeId;
+
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.compose([Validators.required, this.customValidator.validateMail()])]],
@@ -33,6 +36,12 @@ export class ReactiveFormComponent implements OnInit {
         validator: this.customValidator.MatchPassword('password', 'confirmPassword'),
       }
     );
+
+    if (employeId) {
+      const employee = this.getEmployeeById(employeId);
+      this.registerForm.setValue(employee);
+    }
+      
   }
   get registerFormControl() {
     return this.registerForm.controls;
@@ -107,6 +116,17 @@ export class ReactiveFormComponent implements OnInit {
 
   validateForm() {
     this.submitted = false;
+  }
+
+  getEmployeeById(empId: any) {
+    const employees = JSON.parse(localStorage.getItem("emp-details"));
+    let i;
+
+    for (i = 0; i < employees.length; i++) {
+      if (employees[i].empId === empId) {
+        return employees[i];
+      }
+    }
   }
 
   //editData(obj){
