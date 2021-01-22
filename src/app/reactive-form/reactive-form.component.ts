@@ -13,6 +13,7 @@ export class ReactiveFormComponent implements OnInit {
   //empdata: any = [];
   registerForm: FormGroup;
   submitted = false;
+  employeId: any;
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -20,7 +21,7 @@ export class ReactiveFormComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
   ngOnInit() {
-    const employeId = this.route.snapshot.queryParams.employeeId;
+    this.employeId = this.route.snapshot.queryParams.employeeId;
 
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
@@ -37,17 +38,25 @@ export class ReactiveFormComponent implements OnInit {
       }
     );
 
-    if (employeId) {
-      const employee = this.getEmployeeById(employeId);
+    if (this.employeId) {
+      const employee = this.getEmployeeById(this.employeId);
       this.registerForm.setValue(employee);
+      this.removeValidators("username");
+      this.removeValidators("password");
+      this.removeValidators("confirmPassword");
     }
       
   }
+
+  removeValidators(field: string) {
+    this.registerForm.get(field).setValidators([]);
+    this.registerForm.get(field).updateValueAndValidity();
+  }
+
   get registerFormControl() {
     return this.registerForm.controls;
-    
-    
   }
+
   onSubmit() {
     this.submitted = true;
     let employeeData = [];
@@ -72,11 +81,17 @@ export class ReactiveFormComponent implements OnInit {
         const email = [];
         const phones = [];
         const empIds = [];
+        let index = -1;
+        if (this.employeId) {
+          index = this.getIndex(this.employeId);
+        }
         for (let employee of employeeData) {
-          names.push(employee.name);
-          email.push(employee.email);
-          phones.push(employee.empNumber);
-          empIds.push(employee.empId);
+          if (employeeData.indexOf(employee) !== index ) {
+            names.push(employee.name);
+            email.push(employee.email);
+            phones.push(employee.empNumber);
+            empIds.push(employee.empId);
+          }
         }
         const data = this.registerForm.value;
         if (names.includes(data.name)) {
@@ -95,7 +110,11 @@ export class ReactiveFormComponent implements OnInit {
           this.duplicateFound('empId)');
           return;
         }
-        employeeData.push(this.registerForm.value);
+        if (this.employeId) {
+          employeeData.splice(index, 1, this.registerForm.value);
+        } else {
+          employeeData.push(this.registerForm.value);
+        }
       }
 
       localStorage.setItem('emp-details', JSON.stringify(employeeData));
@@ -125,6 +144,16 @@ export class ReactiveFormComponent implements OnInit {
     for (i = 0; i < employees.length; i++) {
       if (employees[i].empId === empId) {
         return employees[i];
+      }
+    }
+  }
+
+  getIndex(empId) {
+    const employees = JSON.parse(localStorage.getItem("emp-details"));
+
+    for (let i = 0; i < employees.length; i++) {
+      if (employees[i].empId === empId) {
+        return i;
       }
     }
   }
