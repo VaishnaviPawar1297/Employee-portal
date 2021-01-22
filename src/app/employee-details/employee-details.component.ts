@@ -13,8 +13,7 @@ import { Router } from '@angular/router';
 export class EmployeeDetailsComponent implements OnInit {
   empdata: any = [];
   
-  //filterValue: Array<any> = [];
-  //order: boolean = false;
+
   
   constructor(
     private router: Router
@@ -23,15 +22,13 @@ export class EmployeeDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.empdata = JSON.parse(localStorage.getItem("emp-details"));
-         
-    
   }
 
-  model: any = {};
+
 
   filterByText(initial: string) {
 
-    // if (initial === "") {
+
     this.empdata = JSON.parse(localStorage.getItem("emp-details")); 
     if  (initial) {
       this.empdata = this.empdata.filter(i => i.name.toLowerCase().indexOf(initial.toLocaleLowerCase()) !== -1);
@@ -65,37 +62,10 @@ export class EmployeeDetailsComponent implements OnInit {
     localStorage.setItem("emp-details", JSON.stringify(this.empdata));
     
   }
-  myValue;
 
   editEmployee(editEmp) {
-    // const index = this.empdata.findIndex(x => x.empId === editEmp.empId);
-    // let oldValue = localStorage.getItem('emp-details');
-    // console.log(oldValue);
-    // this.model.empId = this.empdata[editEmp].empId;
-    // this.myValue = editEmp;
 
     this.router.navigate(['/reactiveform'], { queryParams: { employeeId: editEmp.empId } });
   }
-  
-//   updateEmployee() {
-//     let editEmp = this.myValue;
-//     for(let i = 0; i < this.empdata.length; i++) {
-//       if(i == editEmp) {
-//         this.empdata[i] = this.model;
-//         this.model = {};
-//       }
-//     }
-// }
-//   edit(value) {     
-//     this.router.navigate('/emp-details');
-//     expService.editEntry(value);
 
-//   }
-
-//   editEmployee(value) {
-//     let oldValue = localStorage.getItem(value.key);
-//     value.key = oldValue.key;
-//     localStorage.setItem(value.key, value);
-//   }
-// }
 }

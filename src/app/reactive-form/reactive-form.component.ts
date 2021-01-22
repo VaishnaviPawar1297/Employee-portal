@@ -25,7 +25,7 @@ export class ReactiveFormComponent implements OnInit {
 
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
-      email: ['', [Validators.compose([Validators.required, this.customValidator.validateMail()])]],
+      email: ['', Validators.compose([Validators.required, this.customValidator.validateMail()])],
       username: ['', [Validators.required], this.customValidator.userNameValidator.bind(this.customValidator)],
       empNumber: ['', Validators.compose([Validators.required, this.customValidator.validateNumber()])],
       empId: ['', Validators.compose([Validators.required, this.customValidator.validateId()])],
@@ -62,16 +62,6 @@ export class ReactiveFormComponent implements OnInit {
     let employeeData = [];
 
     if (this.registerForm.valid) {
-      // localStorage.setItem('emp-details', JSON.stringify(this.registerForm.value));
-      // let formValue = JSON.parse(localStorage.getItem('emp-details'));
-
-      // alert('Form Submitted succesfully!!!');
-      // console.table(this.registerForm.value);
-      // console.log(formValue);
-      // this.empdata.push(this.registerForm.value);
-      // console.log(this.empdata);
-      // this.registerForm.reset();
-
       
       if (!localStorage.getItem("emp-details")) {
         employeeData.push(this.registerForm.value);
@@ -158,13 +148,6 @@ export class ReactiveFormComponent implements OnInit {
     }
   }
 
-  //editData(obj){
-    //console.log("In edit Data");
-    //console.log(obj);
-    //this.registerForm.patchValue(obj);
-    
+
 
   }
- // deleteData()
-
-//}

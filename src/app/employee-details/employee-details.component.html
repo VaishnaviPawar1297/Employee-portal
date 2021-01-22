@@ -1,11 +1,4 @@
-<!--<div class="search">
-  <label>Search Employee</label>&nbsp;
-  <input type="text" placeholder="Search">
-</div>-->
-<!-- <ul>
-	<li *ngFor="let e of empdata">{{e.name}}
-	</li>
-</ul> -->
+
 <div class="search">
   <b>Search by Name</b> : <input type="text" (keyup)="filterByText($event.target.value)"> &nbsp;&nbsp;
   <b>Search by Id</b>: <input type="text" (keyup)="filterById($event.target.value)">
