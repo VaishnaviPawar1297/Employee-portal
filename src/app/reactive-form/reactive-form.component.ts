@@ -4,6 +4,11 @@ import { CustomvalidationService } from '../customvalidation.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 
+interface Role{
+  value:string;
+  viewvalue:string;
+}
+
 @Component({
   selector: 'app-reactive-form',
   templateUrl: './reactive-form.component.html',
@@ -11,6 +16,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ReactiveFormComponent implements OnInit {
   //empdata: any = [];
+  empRole  : Role[] = [
+    {value: 'Associate Software Engineer', viewvalue: 'Associate Software Engineer'},
+    {value: 'Trainee Software Engineer', viewvalue: 'Trainee software Engineer'}
+  ];
   registerForm: FormGroup;
   submitted = false;
   employeId: any;

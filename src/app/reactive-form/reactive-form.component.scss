@@ -4,24 +4,42 @@ h1{
     text-decoration: none;
 }
 
-.text-danger{
-    border-color: red;
-}
+// // .text-danger{
+// //     border-color: red;
+// // }
 
-label{
-    text-align: center;
-    color: black;
-    font-size: 19px;
-    font-family: Arial;
+// label{
+//     text-align: center;
+//     color: black;
+//     font-size: 19px;
+//     font-family: Arial;
 
-}
+// }
 button{
     background-color: blue;
     color: white;
 
 }
-.form-group{
-    text-align: center;
-    color:red;
-    padding: 10px;
+// .form-group{
+//     text-align: center;
+//     //color:red;
+//     padding: 10px;
+// }
+
+
+mat-card {
+
+  max-width: 500px;
+
+  margin: 2em auto;
+
+  text-align: center;
+
+}
+
+
+mat-form-field {
+
+  display:block;
+
 }
