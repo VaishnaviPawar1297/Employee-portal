@@ -4,6 +4,20 @@ h1{
     text-decoration: none;
 }
 
+button{
+    background-color: blue;
+    color: white;
+}
+
+mat-card {
+  max-width: 500px;
+  margin: 2em auto;
+  text-align: center;
+}
+
+mat-form-field {
+  display:block;
+}
 // // .text-danger{
 // //     border-color: red;
 // // }
@@ -15,31 +29,8 @@ h1{
 //     font-family: Arial;
 
 // }
-button{
-    background-color: blue;
-    color: white;
-
-}
 // .form-group{
 //     text-align: center;
 //     //color:red;
 //     padding: 10px;
 // }
-
-
-mat-card {
-
-  max-width: 500px;
-
-  margin: 2em auto;
-
-  text-align: center;
-
-}
-
-
-mat-form-field {
-
-  display:block;
-
-}

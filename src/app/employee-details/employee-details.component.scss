@@ -1,8 +1,11 @@
-.navright a{
-    float:right;
+button.addemp{
+    background-color: green;
+    
+    
+
 }
 .search{
-    padding: 30px;
+    padding: 20px;
     color: black;
 }
 
@@ -25,7 +28,19 @@ button{
     border-color: rgb(19, 37, 206);
 
 }
+button.delete{
+    background-color:red;
+    color: white;
+    border-color:red;
+    
+
+}
 th{
+    
     color: green;
     font-size: 20px;
+    text-align: center;
+}
+td{
+    font-size: medium;
 }

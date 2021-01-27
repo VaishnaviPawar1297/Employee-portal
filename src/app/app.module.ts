@@ -7,7 +7,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatRadioModule,MatCardModule,MatInputModule,MatButtonModule} from "@angular/material";
+import {MatRadioModule,MatCardModule,MatInputModule,MatButtonModule, MatSelectModule,MatTableModule} from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -24,6 +24,8 @@ import {MatRadioModule,MatCardModule,MatInputModule,MatButtonModule} from "@angu
     MatInputModule,
     MatButtonModule,
     FormsModule,
+    MatSelectModule,
+    MatTableModule,
     RouterModule.forRoot([
       {path: '', redirectTo: '/reactiveform', pathMatch: 'full'},
       {path: 'reactiveform',  component: ReactiveFormComponent },

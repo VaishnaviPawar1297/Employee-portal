@@ -1,3 +1,122 @@
+<div class="container pt-5">
+    <mat-card class="col-8 mx-auto text-center">
+        <h1>Employee {{ employeId ? 'Update' : 'Registration' }} Form</h1>
+
+        <form [formGroup] = "registerForm" #formDirective="ngForm" (ngSubmit)="onSubmit(registerForm, formDirective)" >
+            <div class="form-group">
+                <mat-form-field appearance="outline">
+                    <mat-label>Employee name</mat-label>
+                    <input type="text" matInput formControlName="name" placeholder="Ex. John William">
+                    <mat-error
+                    *ngIf="registerForm.get('name').hasError('required')">
+                        Full name is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+
+            </div>
+
+            <div class="form-group">
+                <mat-form-field appearance="outline">
+                    <mat-label>Employee Mail</mat-label>
+                    <input type="text" matInput formControlName="email" placeholder="Ex.john@customfurnish.com">
+                    <mat-error *ngIf="registerForm.get('email').hasError('required')">
+                        Email is <strong>required</strong></mat-error>
+                    <mat-error *ngIf="registerForm.get('email').hasError('invalidMail')">
+                        Please enter a valid email address
+                    </mat-error>
+                </mat-form-field> 
+            </div> 
+
+            <div class="form-group">
+                <mat-form-field appearance="outline">
+                    <mat-label>Employee Id</mat-label>
+                    <input type="text" matInput formControlName="empId" placeholder="Ex. HIN123">
+                    <mat-error *ngIf="registerForm.get('empId').hasError('required')">
+                        Employee Id is <strong>required</strong>
+                    </mat-error>
+                
+                    <mat-error *ngIf="registerForm.get('empId').hasError('invalidempId')">
+                        Please enter valid Id
+                    </mat-error>
+                </mat-form-field>  
+            </div>
+
+            <div class="form-group">
+                <mat-form-field appearance="outline">
+                    <mat-label>Employee Ph.no</mat-label>
+                    <input type="text" matInput formControlName="empNumber" placeholder="Ex. 1234567892">
+                    <mat-error *ngIf="registerForm.get('empNumber').hasError('required')">
+                        Employee Phone number is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="registerForm.get('empNumber').hasError('invalidNumber')">
+                        Please enter valid number
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+             <div class="form-group">
+                <mat-form-field appearance="fill">
+                    <mat-label>Employee Designation</mat-label>
+                    <mat-select formControlName="empRole">
+                        <mat-option *ngFor= "let role of roles" [value]="role">{{role}}</mat-option>                        
+                    </mat-select>
+                </mat-form-field>
+            </div> 
+
+            <div class="form-group" *ngIf="!employeId">
+                <mat-form-field appearance="outline">
+                    <mat-label>User name</mat-label>
+                    <input type="text" matInput formControlName="username" placeholder="john">
+                    <mat-error *ngIf="registerForm.get('username').hasError('required')">
+                        User name is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="registerForm.get('username').hasError('userNameNotAvailable')">
+                        Enter valid user name
+                    </mat-error>
+
+                </mat-form-field>
+        
+            </div> 
+
+            <div class="form-group" *ngIf="!employeId">
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input type="password" matInput formControlName="password" placeholder="Ex. john12@7856">
+                    <mat-error *ngIf="registerForm.get('password').hasError('required')">
+                        Password is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="registerForm.get('password').hasError('invalidPassword')">
+                        Please enter valid password
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-group" *ngIf="!employeId">
+                <mat-form-field appearance="outline">
+                    <mat-label>Confirm password</mat-label>
+                    <input type="password" matInput formControlName="confirmPassword" placeholder="Retype password">
+                    <mat-error *ngIf="registerForm.get('confirmPassword').hasError('required')">
+                        Please type correct password
+                    </mat-error>
+                    <mat-error *ngIf="registerForm.get('confirmPassword').hasError('passwordMismatch')">
+                        Password doesnot match
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-group">
+                <button mat-button type="submit" class="btn btn-success" >{{ employeId ? 'Update' : 'Register' }}</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button mat-button type="reset" class="btn btn-reset"  *ngIf="!employeId">Reset</button>                         
+            </div>
+
+        </form>
+
+    </mat-card>
+</div>
+
+
+
+
 <!-- <div class="container">
   <div class="row">
       <div class="col-md-8 mx-auto">
@@ -109,122 +228,7 @@
       </div>
   </div>
 </div> -->
-<div class="container pt-5">
-    <mat-card class="col-8 mx-auto text-center">
-        <h1>Employee {{ employeId ? 'Update' : 'Registration' }} Form</h1>
 
-        <form [formGroup] = "registerForm" (ngSubmit) = "onSubmit()">
-            <div class="form-group">
-                <mat-form-field appearance="outline">
-                    <mat-label>Employee name</mat-label>
-                    <input type="text" matInput formControlName="name" placeholder="Ex. John William">
-                    <mat-error
-                    *ngIf="registerForm.get('name').hasError('required')">
-                        Full name is <strong>required</strong>
-                    </mat-error>
-                </mat-form-field>
-
-            </div>
-
-            <div class="form-group">
-                <mat-form-field appearance="outline">
-                    <mat-label>Employee Mail</mat-label>
-                    <input type="text" matInput formControlName="email" placeholder="Ex.john@customfurnish.com">
-                    <mat-error *ngIf="registerForm.get('email').hasError('required')">
-                        Email is <strong>required</strong></mat-error>
-                    <mat-error *ngIf="registerForm.get('email').hasError('invalidMail')">
-                        Please enter a valid email address
-                    </mat-error>
-                </mat-form-field> 
-            </div> 
-
-            <div class="form-group">
-                <mat-form-field appearance="outline">
-                    <mat-label>Employee Id</mat-label>
-                    <input type="text" matInput formControlName="empId" placeholder="Ex. HIN123">
-                    <mat-error *ngIf="registerForm.get('empId').hasError('required')">
-                        Employee Id is <strong>required</strong>
-                    </mat-error>
-                
-                    <mat-error *ngIf="registerForm.get('empId').hasError('invalidempId')">
-                        Please enter valid Id
-                    </mat-error>
-                </mat-form-field>  
-            </div>
-
-            <div class="form-group">
-                <mat-form-field appearance="outline">
-                    <mat-label>Employee Ph.no</mat-label>
-                    <input type="text" matInput formControlName="empNumber" placeholder="Ex. 1234567892">
-                    <mat-error *ngIf="registerForm.get('empNumber').hasError('required')">
-                        Employee Phone number is <strong>required</strong>
-                    </mat-error>
-                    <mat-error *ngIf="registerForm.get('empNumber').hasError('invalidNumber')">
-                        Please enter valid number
-                    </mat-error>
-                </mat-form-field>
-            </div>
-
-            <!-- <div class="form-group">
-                <mat-form-field appearance="fill">
-                    <mat-label>Employee Designation</mat-label>
-                    <mat-select formControlName="empRole">
-                        <mat-option value="Associate Software Engineer">Associate Software Engineer</mat-option>
-                        <mat-option value="Trainee Software Engineer">Trainee Software Engineer</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>  -->
-
-            <div class="form-group" *ngIf="!employeId">
-                <mat-form-field appearance="outline">
-                    <mat-label>User name</mat-label>
-                    <input type="text" matInput formControlName="username" placeholder="john">
-                    <mat-error *ngIf="registerForm.get('username').hasError('required')">
-                        User name is <strong>required</strong>
-                    </mat-error>
-                    <mat-error *ngIf="registerForm.get('username').hasError('userNameNotAvailable')">
-                        Enter valid user name
-                    </mat-error>
-
-                </mat-form-field>
-        
-            </div> 
-
-            <div class="form-group" *ngIf="!employeId">
-                <mat-form-field appearance="outline">
-                    <mat-label>Password</mat-label>
-                    <input type="password" matInput formControlName="password" placeholder="Ex. john12@7856">
-                    <mat-error *ngIf="registerForm.get('password').hasError('required')">
-                        Password is <strong>required</strong>
-                    </mat-error>
-                    <mat-error *ngIf="registerForm.get('password').hasError('invalidPassword')">
-                        Please enter valid password
-                    </mat-error>
-                </mat-form-field>
-            </div>
-
-            <div class="form-group" *ngIf="!employeId">
-                <mat-form-field appearance="outline">
-                    <mat-label>Confirm password</mat-label>
-                    <input type="password" matInput formControlName="confirmPassword" placeholder="Retype password">
-                    <mat-error *ngIf="registerForm.get('confirmPassword').hasError('required')">
-                        Please type correct password
-                    </mat-error>
-                    <mat-error *ngIf="registerForm.get('confirmPassword').hasError('passwordMismatch')">
-                        Password doesnot match
-                    </mat-error>
-                </mat-form-field>
-            </div>
-
-            <div class="form-group">
-                <button type="submit" class="btn btn-success">{{ employeId ? 'Update' : 'Register' }}</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="reset" class="btn btn-reset" (click)="validateForm()" *ngIf="!employeId">Reset</button>                         
-            </div>
-
-        </form>
-
-    </mat-card>
-</div>
 
 
 

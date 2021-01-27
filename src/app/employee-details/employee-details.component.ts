@@ -4,6 +4,9 @@ import{ReactiveFormComponent} from '../reactive-form/reactive-form.component';
 import {FormGroup} from '@angular/forms';
 import { stringify } from '@angular/core/src/util';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material';
+//import {Details} from '../employee'
+// import { MatTableModule } from '@angular/material/table';
 
 @Component({
   selector: 'app-employee-details',
@@ -12,16 +15,19 @@ import { Router } from '@angular/router';
 })
 export class EmployeeDetailsComponent implements OnInit {
   empdata: any = [];
+  dataSource: MatTableDataSource<any>;
+  public displayedColumns = ['EmployeeName', 'EmployeeMail','EmployeeId','EmployeePh.No','EmployeeDesignation','Actions'];
   
-
-  
+    
   constructor(
-    private router: Router
+    private router: Router,
+    //private details: Details,
   ) { 
   }
 
   ngOnInit() {
     this.empdata = JSON.parse(localStorage.getItem("emp-details"));
+    this.dataSource = new MatTableDataSource(this.empdata);
   }
 
 
@@ -35,6 +41,7 @@ export class EmployeeDetailsComponent implements OnInit {
     }
     
     console.log(this.empdata);
+    this.dataSource = new MatTableDataSource(this.empdata);
   }
   // sortData() {
   //   if (this.order) {
@@ -54,6 +61,7 @@ export class EmployeeDetailsComponent implements OnInit {
       this.empdata = this.empdata.filter(i => i.empId.toLowerCase().indexOf(initial.toLocaleLowerCase()) !== -1);
     }
     console.log(this.empdata)
+    this.dataSource = new MatTableDataSource(this.empdata);
   }
 
   deleteEmp(employee) {    

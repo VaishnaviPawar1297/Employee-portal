@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder, FormGroupDirective } from '@angular/forms';
 import { CustomvalidationService } from '../customvalidation.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import {registerForm} from '../employee';
+//import {Details} from '../employee'
 
 
-interface Role{
-  value:string;
-  viewvalue:string;
-}
+// interface Role{
+//   value:string;
+//   viewvalue:string;
+// }
 
 @Component({
   selector: 'app-reactive-form',
@@ -15,19 +17,24 @@ interface Role{
   styleUrls: ['./reactive-form.component.scss']
 })
 export class ReactiveFormComponent implements OnInit {
+  public registerForm: FormGroup;
   //empdata: any = [];
-  empRole  : Role[] = [
-    {value: 'Associate Software Engineer', viewvalue: 'Associate Software Engineer'},
-    {value: 'Trainee Software Engineer', viewvalue: 'Trainee software Engineer'}
-  ];
-  registerForm: FormGroup;
+  // empRole  : Role[] = [
+  //   {value: 'Associate Software Engineer', viewvalue: 'Associate Software Engineer'},
+  //   {value: 'Trainee Software Engineer', viewvalue: 'Trainee software Engineer'}
+  // ];
+
+  roles=["Associate Software Engineer","Trainee Software Engineer"];
+  //registerForm: FormGroup;
   submitted = false;
   employeId: any;
+  // dataSource = registerForm;
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private customValidator: CustomvalidationService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    // public registerForm: registerForm,
   ) { }
   ngOnInit() {
     this.employeId = this.route.snapshot.queryParams.employeeId;
@@ -66,7 +73,7 @@ export class ReactiveFormComponent implements OnInit {
     return this.registerForm.controls;
   }
 
-  onSubmit() {
+  onSubmit(formData: any, formDirective: FormGroupDirective) {
     this.submitted = true;
     let employeeData = [];
 
@@ -106,7 +113,7 @@ export class ReactiveFormComponent implements OnInit {
           return;
         }
         if (empIds.includes(data.empId))  {
-          this.duplicateFound('empId)');
+          this.duplicateFound('empId');
           return;
         }
         if (this.employeId) {
@@ -120,21 +127,25 @@ export class ReactiveFormComponent implements OnInit {
       alert('Form Submitted succesfully!!!');
      
       this.registerForm.reset();
-      this.submitted = false;
+      formDirective.resetForm();
+      // this.registerForm.markAsPristine();
+      // this.registerForm.markAsUntouched();
+      // this.submitted = false;
     }
   }
 
   duplicateFound(dupType: string) {
     alert('This ' + dupType + ' already exists!!!');
   }
+  
 
   onCancel(){
     this.router.navigate(['']);
   }
 
-  validateForm() {
-    this.submitted = false;
-  }
+  // validateForm() {
+  //   this.submitted = false;
+  // }
 
   getEmployeeById(empId: any) {
     const employees = JSON.parse(localStorage.getItem("emp-details"));
@@ -157,6 +168,4 @@ export class ReactiveFormComponent implements OnInit {
     }
   }
 
-
-
-  }
+}
