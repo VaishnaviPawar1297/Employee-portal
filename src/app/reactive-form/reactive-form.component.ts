@@ -130,7 +130,7 @@ export class ReactiveFormComponent implements OnInit {
       formDirective.resetForm();
       // this.registerForm.markAsPristine();
       // this.registerForm.markAsUntouched();
-      // this.submitted = false;
+       this.submitted = false;
     }
   }
 
