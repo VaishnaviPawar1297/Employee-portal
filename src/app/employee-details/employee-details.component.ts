@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomvalidationService} from '../customvalidation.service';
-import{ReactiveFormComponent} from '../reactive-form/reactive-form.component';
+import{ReactiveFormComponent} from '../employee-form/reactive-form.component';
 import {FormGroup} from '@angular/forms';
 import { stringify } from '@angular/core/src/util';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
-//import {Details} from '../employee'
-// import { MatTableModule } from '@angular/material/table';
+import { EmployeeCrudService } from '../employee-crud.service';
 
 @Component({
   selector: 'app-employee-details',
@@ -21,7 +20,7 @@ export class EmployeeDetailsComponent implements OnInit {
     
   constructor(
     private router: Router,
-    //private details: Details,
+    private dataService: EmployeeCrudService,
   ) { 
   }
 
@@ -30,18 +29,14 @@ export class EmployeeDetailsComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.empdata);
   }
 
-
-
   filterByText(initial: string) {
-
-
-    this.empdata = JSON.parse(localStorage.getItem("emp-details")); 
-    if  (initial) {
-      this.empdata = this.empdata.filter(i => i.name.toLowerCase().indexOf(initial.toLocaleLowerCase()) !== -1);
-    }
-    
-    console.log(this.empdata);
-    this.dataSource = new MatTableDataSource(this.empdata);
+    // this.empdata = JSON.parse(localStorage.getItem("emp-details")); 
+    // if  (initial) {
+    //   this.empdata = this.empdata.filter(i => i.name.toLowerCase().indexOf(initial.toLocaleLowerCase()) !== -1);
+    // }    
+    // console.log(this.empdata);
+    // this.dataSource = new MatTableDataSource(this.empdata);
+    this.dataSource = new MatTableDataSource(this.dataService.filterByText(initial));
   }
   // sortData() {
   //   if (this.order) {
@@ -56,24 +51,30 @@ export class EmployeeDetailsComponent implements OnInit {
 
   filterById(initial: string){
     
-    this.empdata = JSON.parse(localStorage.getItem("emp-details")); 
-    if  (initial) {
-      this.empdata = this.empdata.filter(i => i.empId.toLowerCase().indexOf(initial.toLocaleLowerCase()) !== -1);
-    }
-    console.log(this.empdata)
-    this.dataSource = new MatTableDataSource(this.empdata);
+    // this.empdata = JSON.parse(localStorage.getItem("emp-details")); 
+    // if  (initial) {
+    //   this.empdata = this.empdata.filter(i => i.empId.toLowerCase().indexOf(initial.toLocaleLowerCase()) !== -1);
+    // }
+    // console.log(this.empdata)
+    this.dataSource = new MatTableDataSource(this.dataService.filterById(initial));
   }
 
-  deleteEmp(employee) {    
-    const index = this.empdata.findIndex(x => x.empId === employee.empId);
-    console.log(this.empdata.splice(index,1));
-    localStorage.setItem("emp-details", JSON.stringify(this.empdata));
-    
+  deleteEmp(employee) {
+  this.dataSource = new MatTableDataSource(this.dataService.deleteEmployee(employee));
   }
+
+  // deleteEmp(employee) {    
+  //   const index = this.empdata.findIndex(x => x.empId === employee.empId);
+  //   console.log(this.empdata.splice(index,1));
+  //   localStorage.setItem("emp-details", JSON.stringify(this.empdata));
+    
+  // }
 
   editEmployee(editEmp) {
+    // this.dataSource = new MatTableDataSource(this.dataService.editEmployee(editEmp));
+    this.dataService.editEmployee(editEmp)
 
-    this.router.navigate(['/reactiveform'], { queryParams: { employeeId: editEmp.empId } });
+    // this.router.navigate(['/reactiveform'], { queryParams: { employeeId: editEmp.empId }});
   }
 
 }

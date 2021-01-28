@@ -1,11 +1,11 @@
 
 <div class="search">
-  <mat-form-field appearance="outline">
+  <mat-form-field>
     <mat-label>Search by Name</mat-label>
     <input type="text" placeholder="Search by name" matInput (keyup)="filterByText($event.target.value)">  
   </mat-form-field> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-  <mat-form-field appearance="outline">
+  <mat-form-field>
     <mat-label>Search by Id</mat-label>
     <input type="text" placeholder="Search by Id" matInput (keyup)="filterById($event.target.value)">  
   </mat-form-field>
@@ -16,10 +16,10 @@
 
   <!-- <input type="button" (click)="sortData(order)" [value]="order ? 'Asc' : ' Desc'"> -->
 </div>
-<div>
+<!-- <div>
   <button class="addemp" mat-button routerLink='/reactiveform'>Add Employee</button>
-    <!-- <a  routerLink = "/reactiveform"><b>Add Employee</b></a> -->
-</div>
+    <a  routerLink = "/reactiveform"><b>Add Employee</b></a>
+</div> -->
 
 <!-- <table>
   <thead>

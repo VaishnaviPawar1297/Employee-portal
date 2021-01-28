@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder, FormGroupDirective } from '@angular/forms';
 import { CustomvalidationService } from '../customvalidation.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AlertsService } from 'angular-alert-module';
 import {registerForm} from '../employee';
 //import {Details} from '../employee'
 
@@ -34,6 +35,7 @@ export class ReactiveFormComponent implements OnInit {
     private fb: FormBuilder,
     private customValidator: CustomvalidationService,
     private route: ActivatedRoute,
+    private alerts: AlertsService,
     // public registerForm: registerForm,
   ) { }
   ngOnInit() {
@@ -125,6 +127,8 @@ export class ReactiveFormComponent implements OnInit {
 
       localStorage.setItem('emp-details', JSON.stringify(employeeData));
       alert('Form Submitted succesfully!!!');
+      // this.alerts.setMessage('Form submitted succesfully','sucess');
+
      
       this.registerForm.reset();
       formDirective.resetForm();
