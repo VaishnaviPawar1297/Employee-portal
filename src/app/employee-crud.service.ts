@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ export class EmployeeCrudService {
 
   constructor(
     private router: Router,
+    private http: HttpClient
   ) { }
 
   deleteEmployee(employee: any) {
@@ -39,7 +41,8 @@ export class EmployeeCrudService {
     this.router.navigate(['/reactiveform'], { queryParams: { employeeId: editEmp.empId }});
   }
 
+  saveEmployee(details: any) {
+    return this.http.post('http://127.0.0.1:8000/myapp/save-employee', details);
+  }
+
 }
-// deleteEmp(employee) {
-//   this.dataSource = new MatTableDataSource(this.dataService.deleteEmployee(employee));
-// }

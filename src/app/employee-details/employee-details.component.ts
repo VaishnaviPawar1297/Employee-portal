@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomvalidationService} from '../customvalidation.service';
-import{ReactiveFormComponent} from '../employee-form/reactive-form.component';
-import {FormGroup} from '@angular/forms';
-import { stringify } from '@angular/core/src/util';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
 import { EmployeeCrudService } from '../employee-crud.service';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-employee-details',
@@ -21,6 +20,7 @@ export class EmployeeDetailsComponent implements OnInit {
   constructor(
     private router: Router,
     private dataService: EmployeeCrudService,
+    private http : HttpClient
   ) { 
   }
 
@@ -30,32 +30,10 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   filterByText(initial: string) {
-    // this.empdata = JSON.parse(localStorage.getItem("emp-details")); 
-    // if  (initial) {
-    //   this.empdata = this.empdata.filter(i => i.name.toLowerCase().indexOf(initial.toLocaleLowerCase()) !== -1);
-    // }    
-    // console.log(this.empdata);
-    // this.dataSource = new MatTableDataSource(this.empdata);
     this.dataSource = new MatTableDataSource(this.dataService.filterByText(initial));
   }
-  // sortData() {
-  //   if (this.order) {
-  //     this.empdata = this.empdata.sort((i, j) => (j.empId > i.empId ? -1 : 1));
-  //   }
-  //   else {
-  //     this.empdata = this.empdata.sort((i, j) => (j.empId > i.empId ? 1 : -1));
-  //   }
-    
-  //   this.order = !this.order;
-  // }
 
-  filterById(initial: string){
-    
-    // this.empdata = JSON.parse(localStorage.getItem("emp-details")); 
-    // if  (initial) {
-    //   this.empdata = this.empdata.filter(i => i.empId.toLowerCase().indexOf(initial.toLocaleLowerCase()) !== -1);
-    // }
-    // console.log(this.empdata)
+  filterById(initial: string){    
     this.dataSource = new MatTableDataSource(this.dataService.filterById(initial));
   }
 
@@ -63,18 +41,17 @@ export class EmployeeDetailsComponent implements OnInit {
   this.dataSource = new MatTableDataSource(this.dataService.deleteEmployee(employee));
   }
 
-  // deleteEmp(employee) {    
-  //   const index = this.empdata.findIndex(x => x.empId === employee.empId);
-  //   console.log(this.empdata.splice(index,1));
-  //   localStorage.setItem("emp-details", JSON.stringify(this.empdata));
-    
+  editEmployee(editEmp) {
+    this.dataService.editEmployee(editEmp)
+  }
+
+  // // storeData(store){
+  // //   this.http.get('http://127.0.0.1:8000/myapp/', {responseType: 'json'}).subscribe((response: any) =>
+
+
+
   // }
 
-  editEmployee(editEmp) {
-    // this.dataSource = new MatTableDataSource(this.dataService.editEmployee(editEmp));
-    this.dataService.editEmployee(editEmp)
 
-    // this.router.navigate(['/reactiveform'], { queryParams: { employeeId: editEmp.empId }});
-  }
 
 }

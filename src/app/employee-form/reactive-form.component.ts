@@ -3,14 +3,9 @@ import { Validators, FormGroup, FormBuilder, FormGroupDirective } from '@angular
 import { CustomvalidationService } from '../customvalidation.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertsService } from 'angular-alert-module';
-import {registerForm} from '../employee';
-//import {Details} from '../employee'
+import { HttpClient } from '@angular/common/http';
+import { EmployeeCrudService } from '../employee-crud.service';
 
-
-// interface Role{
-//   value:string;
-//   viewvalue:string;
-// }
 
 @Component({
   selector: 'app-reactive-form',
@@ -19,24 +14,18 @@ import {registerForm} from '../employee';
 })
 export class ReactiveFormComponent implements OnInit {
   public registerForm: FormGroup;
-  //empdata: any = [];
-  // empRole  : Role[] = [
-  //   {value: 'Associate Software Engineer', viewvalue: 'Associate Software Engineer'},
-  //   {value: 'Trainee Software Engineer', viewvalue: 'Trainee software Engineer'}
-  // ];
 
   roles=["Associate Software Engineer","Trainee Software Engineer"];
-  //registerForm: FormGroup;
   submitted = false;
   employeId: any;
-  // dataSource = registerForm;
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private customValidator: CustomvalidationService,
     private route: ActivatedRoute,
     private alerts: AlertsService,
-    // public registerForm: registerForm,
+    private http: HttpClient,
+    private employeeService: EmployeeCrudService
   ) { }
   ngOnInit() {
     this.employeId = this.route.snapshot.queryParams.employeeId;
@@ -123,18 +112,19 @@ export class ReactiveFormComponent implements OnInit {
         } else {
           employeeData.push(this.registerForm.value);
         }
-      }
+     }
 
-      localStorage.setItem('emp-details', JSON.stringify(employeeData));
-      alert('Form Submitted succesfully!!!');
-      // this.alerts.setMessage('Form submitted succesfully','sucess');
+      // localStorage.setItem('emp-details', JSON.stringify(employeeData));
+      // alert('Form Submitted succesfully!!!');
+
+      this.employeeService.saveEmployee(this.registerForm.value).subscribe(response => {
+        console.log('Succes')
+      });
 
      
-      this.registerForm.reset();
-      formDirective.resetForm();
-      // this.registerForm.markAsPristine();
-      // this.registerForm.markAsUntouched();
-       this.submitted = false;
+      // this.registerForm.reset();
+      // formDirective.resetForm();
+      //  this.submitted = false;
     }
   }
 
@@ -172,4 +162,10 @@ export class ReactiveFormComponent implements OnInit {
     }
   }
 
+  getDataFromDjango() {
+    alert("Get Data from DJANGO called");
+    this.http.get('http://127.0.0.1:8000/myapp/', {responseType: 'json'}).subscribe((response: any) => {
+        alert(response);
+    });
+  } 
 }

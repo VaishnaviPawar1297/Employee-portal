@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatRadioModule,MatCardModule,MatInputModule,MatButtonModule, MatSelectModule,MatTableModule} from "@angular/material";
 //import { AlertModule } from 'ngx-alerts';
 import { AlertsModule } from 'angular-alert-module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AlertsModule } from 'angular-alert-module';
     FormsModule,
     MatSelectModule,
     MatTableModule,
+    HttpClientModule,
     //AlertModule.forRoot({maxMessages: 5, timeout: 5000, positionX: 'right'}),
     AlertsModule.forRoot(),
 
