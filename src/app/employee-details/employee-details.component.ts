@@ -25,8 +25,14 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.empdata = JSON.parse(localStorage.getItem("emp-details"));
-    this.dataSource = new MatTableDataSource(this.empdata);
+    this.getDataFromDjango();
+  }
+
+  getDataFromDjango() {
+    this.dataService.tableData().subscribe((response: any) => {
+      this.empdata = response;
+      this.dataSource = new MatTableDataSource(this.empdata);
+    });
   }
 
   filterByText(initial: string) {
@@ -37,21 +43,14 @@ export class EmployeeDetailsComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.dataService.filterById(initial));
   }
 
-  deleteEmp(employee) {
-  this.dataSource = new MatTableDataSource(this.dataService.deleteEmployee(employee));
+  deleteEmp(employeeId) {
+     this.dataService.delete_employee(employeeId).subscribe((response: any) => {
+       console.log(response)
+     });
   }
 
   editEmployee(editEmp) {
     this.dataService.editEmployee(editEmp)
   }
-
-  // // storeData(store){
-  // //   this.http.get('http://127.0.0.1:8000/myapp/', {responseType: 'json'}).subscribe((response: any) =>
-
-
-
-  // }
-
-
 
 }

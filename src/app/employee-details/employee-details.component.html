@@ -81,7 +81,7 @@
     <th mat-header-cell  *matHeaderCellDef > Actions </th>
     <td mat-cell *matCellDef="let emp" >
          <button mat-button (click)="editEmployee(emp) ">Edit</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         <button class="delete" mat-button (click)="deleteEmp(emp)">Delete</button>
+         <button class="delete" mat-button (click)="deleteEmp(emp.empId)">Delete</button>
     </td>
   </ng-container>
 

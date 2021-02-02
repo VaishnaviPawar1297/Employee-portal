@@ -115,16 +115,17 @@ export class ReactiveFormComponent implements OnInit {
      }
 
       // localStorage.setItem('emp-details', JSON.stringify(employeeData));
-      // alert('Form Submitted succesfully!!!');
+       alert('Form Submitted succesfully!!!');
 
       this.employeeService.saveEmployee(this.registerForm.value).subscribe(response => {
         console.log('Succes')
       });
 
+
      
-      // this.registerForm.reset();
-      // formDirective.resetForm();
-      //  this.submitted = false;
+      this.registerForm.reset();
+      formDirective.resetForm();
+       this.submitted = false;
     }
   }
 
@@ -161,11 +162,4 @@ export class ReactiveFormComponent implements OnInit {
       }
     }
   }
-
-  getDataFromDjango() {
-    alert("Get Data from DJANGO called");
-    this.http.get('http://127.0.0.1:8000/myapp/', {responseType: 'json'}).subscribe((response: any) => {
-        alert(response);
-    });
-  } 
 }
