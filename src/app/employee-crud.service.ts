@@ -49,9 +49,13 @@ export class EmployeeCrudService {
     return empdata;
   }
 
-  editEmployee(editEmp: any) {
+  editEmployee(empId: any) {
 
-    this.router.navigate(['/reactiveform'], { queryParams: { employeeId: editEmp.empId }});
+    this.router.navigate(['/reactiveform'], { queryParams: { employeeId: empId }});
+  }
+
+  delete_employee(empId){
+    return this.http.delete('http://127.0.0.1:8000/myapp/delete-employee', {params: {employeeId: empId}});
   }
 
   saveEmployee(details: any) {
@@ -62,9 +66,11 @@ export class EmployeeCrudService {
     return this.http.get('http://127.0.0.1:8000/myapp/', {responseType: 'json'});
   }
 
-  delete_employee(empId){
-    return this.http.delete('http://127.0.0.1:8000/myapp/delete-employee', {params: {employeeId: empId}});
-
+  update(details){
+    return this.http.put('http://127.0.0.1:8000/myapp/update', details);
   }
 
+  empDetails(empId){
+    return this.http.get('http://127.0.0.1:8000/myapp/employee-details', {params: {employeeId: empId}})
+  }
 }

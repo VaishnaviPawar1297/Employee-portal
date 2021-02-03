@@ -18,6 +18,7 @@ export class ReactiveFormComponent implements OnInit {
   roles=["Associate Software Engineer","Trainee Software Engineer"];
   submitted = false;
   employeId: any;
+  update: boolean;
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -46,11 +47,9 @@ export class ReactiveFormComponent implements OnInit {
     );
 
     if (this.employeId) {
+      this.update = true;
       const employee = this.getEmployeeById(this.employeId);
-      this.registerForm.setValue(employee);
-      this.removeValidators("username");
-      this.removeValidators("password");
-      this.removeValidators("confirmPassword");
+      
     }
       
   }
@@ -70,64 +69,68 @@ export class ReactiveFormComponent implements OnInit {
 
     if (this.registerForm.valid) {
       
-      if (!localStorage.getItem("emp-details")) {
-        employeeData.push(this.registerForm.value);
-      } else {
-        employeeData = JSON.parse(localStorage.getItem("emp-details"));
-        const names = [];
-        const email = [];
-        const phones = [];
-        const empIds = [];
-        let index = -1;
-        if (this.employeId) {
-          index = this.getIndex(this.employeId);
-        }
-        for (let employee of employeeData) {
-          if (employeeData.indexOf(employee) !== index ) {
-            names.push(employee.name);
-            email.push(employee.email);
-            phones.push(employee.empNumber);
-            empIds.push(employee.empId);
-          }
-        }
-        const data = this.registerForm.value;
-        if (names.includes(data.name)) {
-          this.duplicateFound('name');
-          return;
-        }
-        if (email.includes(data.email)) {
-          this.duplicateFound('email');
-          return;
-        }
-        if (phones.includes(data.empNumber)) {
-          this.duplicateFound('empNumber');
-          return;
-        }
-        if (empIds.includes(data.empId))  {
-          this.duplicateFound('empId');
-          return;
-        }
-        if (this.employeId) {
-          employeeData.splice(index, 1, this.registerForm.value);
-        } else {
-          employeeData.push(this.registerForm.value);
-        }
-     }
+      // if (!localStorage.getItem("emp-details")) {
+      //   employeeData.push(this.registerForm.value);
+      // } else {
+      //   employeeData = JSON.parse(localStorage.getItem("emp-details"));
+      //   const names = [];
+      //   const email = [];
+      //   const phones = [];
+      //   const empIds = [];
+      //   let index = -1;
+      //   if (this.employeId) {
+      //     index = this.getIndex(this.employeId);
+      //   }
+      //   for (let employee of employeeData) {
+      //     if (employeeData.indexOf(employee) !== index ) {
+      //       names.push(employee.name);
+      //       email.push(employee.email);
+      //       phones.push(employee.empNumber);
+      //       empIds.push(employee.empId);
+      //     }
+      //   }
+      //   const data = this.registerForm.value;
+      //   if (names.includes(data.name)) {
+      //     this.duplicateFound('name');
+      //     return;
+      //   }
+      //   if (email.includes(data.email)) {
+      //     this.duplicateFound('email');
+      //     return;
+      //   }
+      //   if (phones.includes(data.empNumber)) {
+      //     this.duplicateFound('empNumber');
+      //     return;
+      //   }
+      //   if (empIds.includes(data.empId))  {
+      //     this.duplicateFound('empId');
+      //     return;
+      //   }
+      //   if (this.employeId) {
+      //     employeeData.splice(index, 1, this.registerForm.value);
+      //   } else {
+      //     employeeData.push(this.registerForm.value);
+      //   }
+     
 
       // localStorage.setItem('emp-details', JSON.stringify(employeeData));
        alert('Form Submitted succesfully!!!');
-
-      this.employeeService.saveEmployee(this.registerForm.value).subscribe(response => {
-        console.log('Succes')
-      });
-
-
+       if(this.update) {
+        this.employeeService.update(this.registerForm.value).subscribe(response => {
+          console.log('Succes')
+        });
+       } else {
+        this.employeeService.saveEmployee(this.registerForm.value).subscribe(response => {
+          console.log('Succes')
+        });
+       }
      
       this.registerForm.reset();
       formDirective.resetForm();
        this.submitted = false;
     }
   }
+
 
   duplicateFound(dupType: string) {
     alert('This ' + dupType + ' already exists!!!');
@@ -138,22 +141,22 @@ export class ReactiveFormComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-  // validateForm() {
-  //   this.submitted = false;
-  // }
 
   getEmployeeById(empId: any) {
-    const employees = JSON.parse(localStorage.getItem("emp-details"));
-    let i;
+    this.employeeService.empDetails(empId).subscribe((response: any) => {
+      this.registerForm.get('empId').setValue(response.empId);
+      this.registerForm.get('empNumber').setValue(response.empNumber);
+      this.registerForm.get('name').setValue(response.name);
+      this.registerForm.get('empRole').setValue(response.empRole);
+      this.registerForm.get('email').setValue(response.email);
 
-    for (i = 0; i < employees.length; i++) {
-      if (employees[i].empId === empId) {
-        return employees[i];
-      }
-    }
+      this.removeValidators("username");
+      this.removeValidators("password");
+      this.removeValidators("confirmPassword");
+    })
   }
 
-  getIndex(empId) {
+  getIndex(empId) {    
     const employees = JSON.parse(localStorage.getItem("emp-details"));
 
     for (let i = 0; i < employees.length; i++) {
