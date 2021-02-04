@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { promise } from 'protractor';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,6 @@ export class EmployeeCrudService {
 
   // deleteEmployee(employee: any) {
   //   // let empdata = JSON.parse(localStorage.getItem("emp-details"));
-
   //   // const index = empdata.findIndex(x => x.empId === employee.empId);
   //   // empdata.splice(index,1);
   //   // localStorage.setItem("emp-details", JSON.stringify(empdata));
@@ -60,7 +59,7 @@ export class EmployeeCrudService {
   }
 
   empDetails(empId){
-    return this.http.get('http://127.0.0.1:8000/myapp/employee-details', {params: {employeeId: empId}})
+    return this.http.get('http://127.0.0.1:8000/myapp/employee-details', {params: {employeeId: empId}});
   }
 
 }

@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
 import { EmployeeCrudService } from '../employee-crud.service';
 import { HttpClient } from '@angular/common/http';
-import { observable } from 'rxjs';
 
 
 @Component({
@@ -47,7 +46,7 @@ export class EmployeeDetailsComponent implements OnInit {
   deleteEmp(employeeId) {
      this.dataService.delete_employee(employeeId).subscribe((response: any) => {
        console.log(response)
-      this.getDataFromDjango()
+       this.getDataFromDjango()
      });
   }
 

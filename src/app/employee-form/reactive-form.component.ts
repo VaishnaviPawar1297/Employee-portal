@@ -65,7 +65,7 @@ export class ReactiveFormComponent implements OnInit {
 
   onSubmit(formData: any, formDirective: FormGroupDirective) {
     this.submitted = true;
-    let employeeData = [];
+    //let employeeData = [];
 
     if (this.registerForm.valid) {
       
@@ -114,14 +114,16 @@ export class ReactiveFormComponent implements OnInit {
      
 
       // localStorage.setItem('emp-details', JSON.stringify(employeeData));
-       alert('Form Submitted succesfully!!!');
+       //alert('Form Submitted succesfully!!!');
        if(this.update) {
         this.employeeService.update(this.registerForm.value).subscribe(response => {
           console.log('Succes')
+          alert("updated sucessfully")
         });
        } else {
         this.employeeService.saveEmployee(this.registerForm.value).subscribe(response => {
           console.log('Succes')
+          alert('Form Submitted succesfully!!!');
         });
        }
      
@@ -136,12 +138,6 @@ export class ReactiveFormComponent implements OnInit {
     alert('This ' + dupType + ' already exists!!!');
   }
   
-
-  onCancel(){
-    this.router.navigate(['']);
-  }
-
-
   getEmployeeById(empId: any) {
     this.employeeService.empDetails(empId).subscribe((response: any) => {
       this.registerForm.get('empId').setValue(response.empId);
@@ -156,13 +152,13 @@ export class ReactiveFormComponent implements OnInit {
     })
   }
 
-  getIndex(empId) {    
-    const employees = JSON.parse(localStorage.getItem("emp-details"));
+  // getIndex(empId) {    
+  //   const employees = JSON.parse(localStorage.getItem("emp-details"));
 
-    for (let i = 0; i < employees.length; i++) {
-      if (employees[i].empId === empId) {
-        return i;
-      }
-    }
-  }
+  //   for (let i = 0; i < employees.length; i++) {
+  //     if (employees[i].empId === empId) {
+  //       return i;
+  //     }
+  //   }
+  // }
 }
