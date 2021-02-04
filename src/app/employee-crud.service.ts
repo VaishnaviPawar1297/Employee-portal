@@ -14,35 +14,24 @@ export class EmployeeCrudService {
   ) { }
 
   // deleteEmployee(employee: any) {
-  //   this.delete_employee().subscribe((response: any) => {
-  //     let empdata = response
-  //   })
   //   // let empdata = JSON.parse(localStorage.getItem("emp-details"));
-  //   // // let empdata = this.tableData().subscribe((response:any) => {
-  //   // //   empdata = response
-  //   // // })
+
   //   // const index = empdata.findIndex(x => x.empId === employee.empId);
   //   // empdata.splice(index,1);
   //   // localStorage.setItem("emp-details", JSON.stringify(empdata));
   //   // return empdata;
   // }
 
-  filterById(initial: string){
-    let empdata = JSON.parse(localStorage.getItem("emp-details"));
+  filterById(initial: string, empdata: Array<any>){
+    //let empdata = JSON.parse(localStorage.getItem("emp-details"));
     if  (initial) {
       empdata = empdata.filter(i => i.empId.toLowerCase().indexOf(initial.toLocaleLowerCase()) !== -1);
     }
     return empdata;
   }
 
-  filterByText(initial: string){
-    // this.tableData().subscribe((response: any) => {
-    //   let empdata = response
-    // })
-    // let empdata = this.tableData().subscribe((response:any) => {
-    //   empdata = response
-    // })
-    let empdata = JSON.parse(localStorage.getItem("emp-details"));
+  filterByText(initial: string, empdata: Array<any>){    
+    // let empdata = JSON.parse(localStorage.getItem("emp-details"));
     if (initial) {
       empdata = empdata.filter(i => i.name.toLowerCase().indexOf(initial.toLocaleLowerCase()) !== -1);
     }
@@ -73,4 +62,6 @@ export class EmployeeCrudService {
   empDetails(empId){
     return this.http.get('http://127.0.0.1:8000/myapp/employee-details', {params: {employeeId: empId}})
   }
+
 }
+

@@ -37,11 +37,11 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   filterByText(initial: string) {
-    this.dataSource = new MatTableDataSource(this.dataService.filterByText(initial));
+    this.dataSource = new MatTableDataSource(this.dataService.filterByText(initial, this.empdata));
   }
 
   filterById(initial: string){    
-    this.dataSource = new MatTableDataSource(this.dataService.filterById(initial));
+    this.dataSource = new MatTableDataSource(this.dataService.filterById(initial, this.empdata));
   }
 
   deleteEmp(employeeId) {
