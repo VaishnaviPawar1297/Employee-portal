@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AlertsService } from 'angular-alert-module';
 import { HttpClient } from '@angular/common/http';
 import { EmployeeCrudService } from '../employee-crud.service';
+import { error } from '@angular/compiler/src/util';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { EmployeeCrudService } from '../employee-crud.service';
 export class ReactiveFormComponent implements OnInit {
   public registerForm: FormGroup;
 
-  roles=["Associate Software Engineer","Trainee Software Engineer"];
+  roles: any;
   submitted = false;
   employeId: any;
   update: boolean;
@@ -30,7 +31,7 @@ export class ReactiveFormComponent implements OnInit {
   ) { }
   ngOnInit() {
     this.employeId = this.route.snapshot.queryParams.employeeId;
-
+    this.getDesignation();
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, this.customValidator.validateMail()])],
@@ -119,17 +120,28 @@ export class ReactiveFormComponent implements OnInit {
         this.employeeService.update(this.registerForm.value).subscribe(response => {
           console.log('Succes')
           alert("updated sucessfully")
-        });
+
+          this.registerForm.reset();
+          formDirective.resetForm();
+        },
+        error => {
+          alert(error.error.msg);
+        }
+        );
        } else {
         this.employeeService.saveEmployee(this.registerForm.value).subscribe(response => {
           console.log('Succes')
           alert('Form Submitted succesfully!!!');
+     
+          this.registerForm.reset();
+          formDirective.resetForm();
+        },
+        error => {
+          
+          alert(error.error.msg);
         });
        }
-     
-      this.registerForm.reset();
-      formDirective.resetForm();
-       this.submitted = false;
+       //this.submitted = false;
     }
   }
 
@@ -150,6 +162,12 @@ export class ReactiveFormComponent implements OnInit {
       this.removeValidators("password");
       this.removeValidators("confirmPassword");
     })
+  }
+
+  getDesignation(){
+    this.employeeService.getDesignation().subscribe((response: any) => {
+      this.roles = response
+    });
   }
 
   // getIndex(empId) {    

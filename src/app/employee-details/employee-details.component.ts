@@ -36,11 +36,18 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   filterByText(initial: string) {
-    this.dataSource = new MatTableDataSource(this.dataService.filterByText(initial, this.empdata));
+    // 
+    this.dataService.filterByText(initial).subscribe((response: any) => {
+      // this.empdata = response;
+      this.dataSource = new MatTableDataSource(response)
+    });
   }
 
   filterById(initial: string){    
-    this.dataSource = new MatTableDataSource(this.dataService.filterById(initial, this.empdata));
+    // this.dataSource = new MatTableDataSource(this.dataService.filterById(initial, this.empdata));
+    this.dataService.filterById(initial).subscribe((response: any) => {
+      this.dataSource = new MatTableDataSource(response)
+    })
   }
 
   deleteEmp(employeeId) {

@@ -11,6 +11,8 @@ import {MatRadioModule,MatCardModule,MatInputModule,MatButtonModule, MatSelectMo
 //import { AlertModule } from 'ngx-alerts';
 import { AlertsModule } from 'angular-alert-module';
 import { HttpClientModule } from '@angular/common/http';
+import { EmployeeCrudService } from './employee-crud.service';
+import { DesignationComponent } from './designation/designation.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormComponent,
     NavBarComponent,
     EmployeeDetailsComponent,
+    DesignationComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,13 +33,13 @@ import { HttpClientModule } from '@angular/common/http';
     MatSelectModule,
     MatTableModule,
     HttpClientModule,
-    //AlertModule.forRoot({maxMessages: 5, timeout: 5000, positionX: 'right'}),
     AlertsModule.forRoot(),
 
     RouterModule.forRoot([
       {path: '', redirectTo: '/reactiveform', pathMatch: 'full'},
       {path: 'reactiveform',  component: ReactiveFormComponent },
       {path: 'empdetails', component: EmployeeDetailsComponent},
+      {path: 'designation', component: DesignationComponent },
 
     ]),
     BrowserAnimationsModule,

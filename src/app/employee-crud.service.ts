@@ -21,20 +21,22 @@ export class EmployeeCrudService {
   //   // return empdata;
   // }
 
-  filterById(initial: string, empdata: Array<any>){
+  filterById(initial: string){
     //let empdata = JSON.parse(localStorage.getItem("emp-details"));
-    if  (initial) {
-      empdata = empdata.filter(i => i.empId.toLowerCase().indexOf(initial.toLocaleLowerCase()) !== -1);
-    }
-    return empdata;
+    // if  (initial) {
+    //   empdata = empdata.filter(i => i.empId.toLowerCase().indexOf(initial.toLocaleLowerCase()) !== -1);
+    // }
+    // return empdata;
+    return this.http.get('http://127.0.0.1:8000/myapp/searchId', {'params' :{'searchId': initial}})
   }
 
-  filterByText(initial: string, empdata: Array<any>){    
+  filterByText(initial: string){    
     // let empdata = JSON.parse(localStorage.getItem("emp-details"));
-    if (initial) {
-      empdata = empdata.filter(i => i.name.toLowerCase().indexOf(initial.toLocaleLowerCase()) !== -1);
-    }
-    return empdata;
+    // if (initial) {
+    //   empdata = empdata.filter(i => i.name.toLowerCase().indexOf(initial.toLocaleLowerCase()) !== -1);
+    // }
+    // return empdata;
+    return this.http.get('http://127.0.0.1:8000/myapp/search', {'params': {'searchString': initial}})
   }
 
   editEmployee(empId: any) {
@@ -62,5 +64,12 @@ export class EmployeeCrudService {
     return this.http.get('http://127.0.0.1:8000/myapp/employee-details', {params: {employeeId: empId}});
   }
 
-}
+  // employeeDesignation(empRole: any){
+  //   this.router.navigate(['/designation'])
+  // }
 
+  getDesignation(){
+    return this.http.get('http://127.0.0.1:8000/myapp/get_designations');
+  }
+
+}
