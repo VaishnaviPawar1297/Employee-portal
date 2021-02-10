@@ -9,6 +9,11 @@
 
 # dependencies
 /node_modules
+/employeeportal_web/node_modules
+/employeeportal_web/dist
+/employeeportal/workspace.xml
+/employeeportal/HelloDjango/.idea/*
+
 
 # profiling files
 chrome-profiler-events.json
