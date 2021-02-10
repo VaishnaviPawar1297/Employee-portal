@@ -5,7 +5,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AlertsService } from 'angular-alert-module';
 import { HttpClient } from '@angular/common/http';
 import { EmployeeCrudService } from '../employee-crud.service';
-import { error } from '@angular/compiler/src/util';
 
 
 @Component({
@@ -146,9 +145,9 @@ export class ReactiveFormComponent implements OnInit {
   }
 
 
-  duplicateFound(dupType: string) {
-    alert('This ' + dupType + ' already exists!!!');
-  }
+  // duplicateFound(dupType: string) {
+  //   alert('This ' + dupType + ' already exists!!!');
+  // }
   
   getEmployeeById(empId: any) {
     this.employeeService.empDetails(empId).subscribe((response: any) => {

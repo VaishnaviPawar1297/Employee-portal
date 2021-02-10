@@ -85,7 +85,26 @@
     </td>
   </ng-container>
 
+  
+
+<!-- <div class="page-buttons">
+  <button class="btn prev" (click)="fetchPrevious()">
+  </button>
+  <button class="btn next" (click)="fetchNext()">
+  </button>
+</div> -->
+
+<!-- <div>
+  <div *ngFor="let totalPage of totalPages">{{totalPage.data}}</div>
+</div> -->
+
+
+  
+
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
+<mat-paginator [length]="totalCount" (page)="onPageChange($event)"
+              [pageSize]="5">
+</mat-paginator>

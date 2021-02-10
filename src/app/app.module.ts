@@ -13,6 +13,7 @@ import { AlertsModule } from 'angular-alert-module';
 import { HttpClientModule } from '@angular/common/http';
 import { EmployeeCrudService } from './employee-crud.service';
 import { DesignationComponent } from './designation/designation.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { DesignationComponent } from './designation/designation.component';
     MatTableModule,
     HttpClientModule,
     AlertsModule.forRoot(),
+    MatPaginatorModule,
 
     RouterModule.forRoot([
       {path: '', redirectTo: '/reactiveform', pathMatch: 'full'},

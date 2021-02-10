@@ -1,12 +1,11 @@
 button.addemp{
     background-color: green;
 }
-
-
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 100%;
+    width: 80%;
+    margin: 50px;
 }
 td, th {
     border: 1px solid #dddddd;
@@ -16,17 +15,12 @@ td, th {
 tr:nth-child(even) {
     background-color: #dddddd;
 }
-
-
-th{
-    
+th{    
     color: green;
     font-size: 20px;
-
 }
 td{
     font-size: medium;
-
 }
 
 

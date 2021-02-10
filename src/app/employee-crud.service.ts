@@ -52,8 +52,8 @@ export class EmployeeCrudService {
     return this.http.post('http://127.0.0.1:8000/myapp/save-employee', details);
   }
 
-  tableData(){
-    return this.http.get('http://127.0.0.1:8000/myapp/', {responseType: 'json'});
+  tableData(data?: any){
+    return this.http.get('http://127.0.0.1:8000/myapp/', {params: data});
   }
 
   update(details){
@@ -63,10 +63,6 @@ export class EmployeeCrudService {
   empDetails(empId){
     return this.http.get('http://127.0.0.1:8000/myapp/employee-details', {params: {employeeId: empId}});
   }
-
-  // employeeDesignation(empRole: any){
-  //   this.router.navigate(['/designation'])
-  // }
 
   getDesignation(){
     return this.http.get('http://127.0.0.1:8000/myapp/get_designations');

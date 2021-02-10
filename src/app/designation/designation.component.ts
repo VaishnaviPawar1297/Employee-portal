@@ -11,6 +11,7 @@ export class DesignationComponent implements OnInit {
   empdata: any = [];
   dataSource: MatTableDataSource<any>;
   public displayedColumns = ['EmployeeName', 'EmployeeDesignation'];
+  totalPages: any;
 
   constructor(
     private dataService: EmployeeCrudService,
@@ -22,7 +23,8 @@ export class DesignationComponent implements OnInit {
 
   getDataFromDjango() {
     this.dataService.tableData().subscribe((response: any) => {
-      this.empdata = response;
+      this.empdata = response.data;
+      this.totalPages = response.totalPages;
       this.dataSource = new MatTableDataSource(this.empdata);
     });
   }
